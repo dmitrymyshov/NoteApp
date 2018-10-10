@@ -13,9 +13,13 @@ namespace NoteApp
     public class Note : ICloneable
     {
         private string _title;
+
         private NoteCategory _noteCategory;
+
         private string _text;
+
         private DateTime _dateCreate;
+
         private DateTime _dateChange;
 
         /// <summary>
@@ -24,6 +28,7 @@ namespace NoteApp
         public string Title
         {
             get { return _title; }
+
             set
             {
                 if (value.Length == 0)
@@ -37,8 +42,6 @@ namespace NoteApp
                 else
                 {
                     _title = value;
-
-                    DateChange = DateTime.Now;
                 }
             }
         }
@@ -49,18 +52,10 @@ namespace NoteApp
         public NoteCategory Category
         {
             get { return _noteCategory; }
+
             set
             {
-                if (value < 0 && (int)value > 6)           //тут вопрос. почему в 1 раз сработало а 2 нет
-                {
-                    throw new ArgumentException("Значение выходит за пределы нашего пеерчисления");
-                }
-                else
-                {
-                    _noteCategory = value;
-
-                    DateChange = DateTime.Now;
-                }
+                _noteCategory = value;
             }
         }
 
@@ -70,18 +65,10 @@ namespace NoteApp
         public string Text
         {
             get { return _text; }
+
             set
             {
-                if (value.Length < 0)
-                {
-                    throw new ArgumentException("Длина текста не может быть отрицательной");
-                }
-                else
-                {
-                    _text = value;
-
-                    DateChange = DateTime.Now;
-                }
+                _text = value;
             }
         }
 
@@ -93,20 +80,38 @@ namespace NoteApp
         /// <summary>
         /// Возвращает время изменения заметки
         /// </summary>
-        public DateTime DateChange { get; set; }
+        public DateTime DateChange
+        {
+            get { return _dateChange; }
+
+            set
+            {
+                if (value > DateTime.Now)
+                {
+                    throw new ArgumentException("Дата изменения не может быть больше текущей даты");
+                }
+                else
+                {
+                    _dateChange = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Созддание заметки
         /// </summary>
         ///<param name="title">Заголовок новой заметки</param>
-        ///<param name="noteCategore">Категория новой заметки</param>
+        ///<param name="noteCategory">Категория новой заметки</param>
         ///<param name="text">Текст новой заметки</param>
         ///<param name="dateCreate">Дата создания новой заметки</param>
-        public Note(string title, NoteCategory noteCategore, string text, DateTime dateCreate)
+        public Note(string title, NoteCategory noteCategory, string text, DateTime dateCreate)
         {
             Title = title;
-            Category = noteCategore;
+
+            Category = noteCategory;
+
             Text = text;
+
             DateCreate = dateCreate;
         }
 
@@ -121,6 +126,5 @@ namespace NoteApp
                 DateChange = this.DateChange
             };
         }
-
     }
 }

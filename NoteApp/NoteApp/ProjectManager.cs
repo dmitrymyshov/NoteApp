@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,12 @@ namespace NoteApp
         /// <summary>
         /// Сохранение списка заметок
         /// </summary>
-        /// <param name="saveNote">Список заметок</param>
+        /// <param name="data">Список заметок</param>
         /// <param name="fileName">Путь к файлу</param>
         public static void SaveToFile(Project data, string fileName)
         {
             JsonSerializer serializer = new JsonSerializer();
-
+            
             using (StreamWriter sw = new StreamWriter(fileName))
 
             using (JsonWriter writer = new JsonTextWriter(sw))
@@ -70,4 +71,3 @@ namespace NoteApp
         }
     }
 }
-
