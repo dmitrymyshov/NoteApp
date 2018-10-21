@@ -12,7 +12,7 @@ using NoteApp;
 
 namespace NoteAppUi
 {
-    public partial class InnerForm : Form
+    public partial class NoteForm : Form
     {
         private Note _note;
 
@@ -26,7 +26,7 @@ namespace NoteAppUi
                 {
                     TitleTextBox.Text = _note.Title; //при отправлении заметки в это окно, автоматом заполнятся компоненты формы
 
-                    CategorysComboBox.Text = _note.Category.ToString();
+                    CategorysComboBox.SelectedItem = _note.Category;
 
                     CreateDateTimePicker.Value = _note.DateCreate;
 
@@ -37,25 +37,23 @@ namespace NoteAppUi
             }
         }
 
-        public InnerForm()
+        public NoteForm()
         {
             InitializeComponent();
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Work);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Home);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.HealthAndSport);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Peoples);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Documents);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Finance);
-            CategorysComboBox.Items.Add(NoteApp.NoteCategory.Other);
+
+            foreach (NoteCategory element in Enum.GetValues(typeof(NoteCategory)))
+            {
+                CategorysComboBox.Items.Add(element);
+            }
         }
 
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
             _note.Title = TitleTextBox.Text;
 
-            if (TitleTextBox.Text.Length == 0 || TitleTextBox.Text.Length > 50)
+            if (CheckTitle)
             {
-                TitleTextBox.BackColor = Color.Red;
+                TitleTextBox.BackColor = Color.LightSalmon;
             }
             else
             {
@@ -63,36 +61,13 @@ namespace NoteAppUi
             }
         }
 
-        private void CategorysComboBox_TextChanged(object sender, EventArgs e)
-        {
-            for (int i = 0; i < CategorysComboBox.Items.Count; i++) { 
-
-                
-                if (CategorysComboBox.Text != CategorysComboBox.Items[i].ToString())
-                {
-                    CategorysComboBox.BackColor = Color.Red;
-
-                }
-                else
-                {
-                    CategorysComboBox.BackColor = Color.White;
-
-                    var selectedIndex = CategorysComboBox.SelectedIndex;
-
-                    _note.Category = (NoteCategory)CategorysComboBox.Items[i];
-
-                    break;                 
-                }
-            }
-        }
-
         private void NoteTextBox_TextChanged(object sender, EventArgs e)
         {
             _note.Text = NoteTextBox.Text;
 
-            if (NoteTextBox.Text == "")
+            if (CheckText)
             {
-                NoteTextBox.BackColor = Color.Red;
+                NoteTextBox.BackColor = Color.LightSalmon;
             }
             else
             {
@@ -102,7 +77,7 @@ namespace NoteAppUi
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (NoteTextBox.BackColor == Color.Red || CategorysComboBox.BackColor == Color.Red || TitleTextBox.BackColor == Color.Red)
+            if (CheckTitle || CheckText || CheckCategory)
             {
                 MessageBox.Show("Данные введены некоректно");
             }
@@ -123,15 +98,68 @@ namespace NoteAppUi
             this.Close();
         }
 
-        private void CreateDateTimePicker_ValueChanged(object sender, EventArgs e)
+        private void CategorysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (CheckCategory)
+            {
+                CategorysComboBox.BackColor = Color.LightSalmon;
+            }
+            else
+            {
+                CategorysComboBox.BackColor = Color.White;
 
+                var selectedIndex = CategorysComboBox.SelectedIndex;
+
+                _note.Category = (NoteCategory)CategorysComboBox.Items[selectedIndex];
+            }
         }
 
-        private void ChangeDateTimePicker_ValueChanged(object sender, EventArgs e)
+        private bool CheckTitle
         {
-
+            get
+            {
+                if (_note.Title == string.Empty)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set {  }
         }
 
+        private bool CheckText
+        {
+            get
+            {
+                if (_note.Text == string.Empty)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set { }
+        }
+
+        private bool CheckCategory
+        {
+            get
+            {
+                if (CategorysComboBox.SelectedIndex == -1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set { }
+        }
     }
 }

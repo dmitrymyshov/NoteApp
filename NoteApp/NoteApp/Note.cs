@@ -90,6 +90,10 @@ namespace NoteApp
                 {
                     throw new ArgumentException("Дата изменения не может быть больше текущей даты");
                 }
+                else if (value < DateCreate)
+                {
+                    throw new ArgumentException("Дата изменения не может быть меньше даты создания");
+                }
                 else
                 {
                     _dateChange = value;
@@ -107,13 +111,12 @@ namespace NoteApp
         public Note(string title, NoteCategory noteCategory, string text, DateTime dateCreate)
         {
             Title = title;
-
             Category = noteCategory;
-
             Text = text;
-
             DateCreate = dateCreate;
         }
+
+
 
         /// <summary>
         /// Клонирование заметки

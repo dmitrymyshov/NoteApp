@@ -13,7 +13,7 @@ namespace NoteApp
     /// </summary>
     public class ProjectManager
     {
-        private const string _path = @"d:\NoteApp.notes";  //Закрытая константа, содержащая путь 
+        private static string _path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\NoteApp.notes";  //Закрытая константа, содержащая путь 
 
         /// <summary>
         /// Сохранение списка заметок

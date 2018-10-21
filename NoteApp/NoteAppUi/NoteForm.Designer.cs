@@ -1,6 +1,6 @@
 ﻿namespace NoteAppUi
 {
-    partial class InnerForm
+    partial class NoteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -43,10 +43,11 @@
             // 
             // TitleTextBox
             // 
-            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleTextBox.Location = new System.Drawing.Point(68, 23);
+            this.TitleTextBox.MaxLength = 50;
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(706, 20);
             this.TitleTextBox.TabIndex = 0;
@@ -55,12 +56,14 @@
             // CategorysComboBox
             // 
             this.CategorysComboBox.BackColor = System.Drawing.SystemColors.Window;
+            this.CategorysComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategorysComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CategorysComboBox.FormattingEnabled = true;
             this.CategorysComboBox.Location = new System.Drawing.Point(68, 49);
             this.CategorysComboBox.Name = "CategorysComboBox";
             this.CategorysComboBox.Size = new System.Drawing.Size(121, 21);
             this.CategorysComboBox.TabIndex = 1;
-            this.CategorysComboBox.TextChanged += new System.EventHandler(this.CategorysComboBox_TextChanged);
+            this.CategorysComboBox.SelectedIndexChanged += new System.EventHandler(this.CategorysComboBox_SelectedIndexChanged);
             // 
             // CreateDateTimePicker
             // 
@@ -69,7 +72,6 @@
             this.CreateDateTimePicker.Name = "CreateDateTimePicker";
             this.CreateDateTimePicker.Size = new System.Drawing.Size(140, 20);
             this.CreateDateTimePicker.TabIndex = 2;
-            this.CreateDateTimePicker.ValueChanged += new System.EventHandler(this.CreateDateTimePicker_ValueChanged);
             // 
             // ChangeDateTimePicker
             // 
@@ -78,12 +80,11 @@
             this.ChangeDateTimePicker.Name = "ChangeDateTimePicker";
             this.ChangeDateTimePicker.Size = new System.Drawing.Size(140, 20);
             this.ChangeDateTimePicker.TabIndex = 3;
-            this.ChangeDateTimePicker.ValueChanged += new System.EventHandler(this.ChangeDateTimePicker_ValueChanged);
             // 
             // NoteTextBox
             // 
-            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextBox.Location = new System.Drawing.Point(12, 102);
             this.NoteTextBox.Multiline = true;

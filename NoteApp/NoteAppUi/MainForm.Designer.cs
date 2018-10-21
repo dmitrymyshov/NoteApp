@@ -62,10 +62,12 @@
             // 
             this.CategorysComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CategorysComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategorysComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CategorysComboBox.FormattingEnabled = true;
             this.CategorysComboBox.Location = new System.Drawing.Point(105, 12);
             this.CategorysComboBox.Name = "CategorysComboBox";
-            this.CategorysComboBox.Size = new System.Drawing.Size(165, 21);
+            this.CategorysComboBox.Size = new System.Drawing.Size(131, 21);
             this.CategorysComboBox.TabIndex = 0;
             this.CategorysComboBox.SelectedIndexChanged += new System.EventHandler(this.CategorysComboBox_SelectedIndexChanged);
             // 
@@ -77,7 +79,7 @@
             this.TitlesListBox.FormattingEnabled = true;
             this.TitlesListBox.Location = new System.Drawing.Point(12, 43);
             this.TitlesListBox.Name = "TitlesListBox";
-            this.TitlesListBox.Size = new System.Drawing.Size(258, 329);
+            this.TitlesListBox.Size = new System.Drawing.Size(224, 329);
             this.TitlesListBox.TabIndex = 1;
             this.TitlesListBox.SelectedIndexChanged += new System.EventHandler(this.TitlesListBox_SelectedIndexChanged);
             // 
@@ -88,22 +90,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TitleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleTextBox.Location = new System.Drawing.Point(3, 2);
+            this.TitleTextBox.Location = new System.Drawing.Point(3, 3);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.ReadOnly = true;
-            this.TitleTextBox.Size = new System.Drawing.Size(528, 23);
+            this.TitleTextBox.Size = new System.Drawing.Size(574, 23);
             this.TitleTextBox.TabIndex = 2;
-            this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
             // CategoryTextBox
             // 
             this.CategoryTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CategoryTextBox.Location = new System.Drawing.Point(2, 34);
+            this.CategoryTextBox.Location = new System.Drawing.Point(3, 34);
             this.CategoryTextBox.Name = "CategoryTextBox";
             this.CategoryTextBox.ReadOnly = true;
             this.CategoryTextBox.Size = new System.Drawing.Size(190, 13);
             this.CategoryTextBox.TabIndex = 3;
-            this.CategoryTextBox.TextChanged += new System.EventHandler(this.CategoryTextBox_TextChanged);
             // 
             // CreateDateTimePicker
             // 
@@ -114,20 +114,16 @@
             this.CreateDateTimePicker.Name = "CreateDateTimePicker";
             this.CreateDateTimePicker.Size = new System.Drawing.Size(138, 20);
             this.CreateDateTimePicker.TabIndex = 4;
-            this.CreateDateTimePicker.Visible = false;
-            this.CreateDateTimePicker.ValueChanged += new System.EventHandler(this.CreateDateTimePicker_ValueChanged);
             // 
             // ChangeDateTimePicker
             // 
             this.ChangeDateTimePicker.Enabled = false;
-            this.ChangeDateTimePicker.Location = new System.Drawing.Point(262, 53);
+            this.ChangeDateTimePicker.Location = new System.Drawing.Point(274, 53);
             this.ChangeDateTimePicker.MaximumSize = new System.Drawing.Size(138, 20);
             this.ChangeDateTimePicker.MinimumSize = new System.Drawing.Size(130, 20);
             this.ChangeDateTimePicker.Name = "ChangeDateTimePicker";
             this.ChangeDateTimePicker.Size = new System.Drawing.Size(137, 20);
             this.ChangeDateTimePicker.TabIndex = 5;
-            this.ChangeDateTimePicker.Visible = false;
-            this.ChangeDateTimePicker.ValueChanged += new System.EventHandler(this.ChangeDateTimePicker_ValueChanged);
             // 
             // NoteTextBox
             // 
@@ -139,16 +135,14 @@
             this.NoteTextBox.Name = "NoteTextBox";
             this.NoteTextBox.ReadOnly = true;
             this.NoteTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NoteTextBox.Size = new System.Drawing.Size(540, 337);
+            this.NoteTextBox.Size = new System.Drawing.Size(574, 338);
             this.NoteTextBox.TabIndex = 6;
-            this.NoteTextBox.Visible = false;
-            this.NoteTextBox.TextChanged += new System.EventHandler(this.NoteTextBox_TextChanged);
             // 
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DeleteButton.Image = global::NoteAppUi.Properties.Resources.delete__1_;
-            this.DeleteButton.Location = new System.Drawing.Point(94, 382);
+            this.DeleteButton.Location = new System.Drawing.Point(94, 383);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(35, 35);
             this.DeleteButton.TabIndex = 9;
@@ -159,7 +153,7 @@
             // 
             this.NewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NewButton.Image = global::NoteAppUi.Properties.Resources.add__1_;
-            this.NewButton.Location = new System.Drawing.Point(12, 382);
+            this.NewButton.Location = new System.Drawing.Point(12, 383);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(35, 35);
             this.NewButton.TabIndex = 8;
@@ -170,7 +164,7 @@
             // 
             this.ChangeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ChangeButton.Image = global::NoteAppUi.Properties.Resources.edit__1_;
-            this.ChangeButton.Location = new System.Drawing.Point(53, 382);
+            this.ChangeButton.Location = new System.Drawing.Point(53, 383);
             this.ChangeButton.Name = "ChangeButton";
             this.ChangeButton.Size = new System.Drawing.Size(35, 35);
             this.ChangeButton.TabIndex = 7;
@@ -191,13 +185,12 @@
             // 
             this.ChangeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ChangeTextBox.Enabled = false;
-            this.ChangeTextBox.Location = new System.Drawing.Point(211, 57);
+            this.ChangeTextBox.Location = new System.Drawing.Point(223, 57);
             this.ChangeTextBox.MinimumSize = new System.Drawing.Size(45, 13);
             this.ChangeTextBox.Name = "ChangeTextBox";
             this.ChangeTextBox.Size = new System.Drawing.Size(45, 13);
             this.ChangeTextBox.TabIndex = 12;
             this.ChangeTextBox.Text = "Modified:";
-            this.ChangeTextBox.Visible = false;
             // 
             // CreateTextBox
             // 
@@ -208,7 +201,6 @@
             this.CreateTextBox.Size = new System.Drawing.Size(45, 13);
             this.CreateTextBox.TabIndex = 13;
             this.CreateTextBox.Text = "Created:";
-            this.CreateTextBox.Visible = false;
             // 
             // menuStrip1
             // 
@@ -300,6 +292,7 @@
             this.splitContainerNote.Panel1.Controls.Add(this.ShowCatgoryTextBox);
             this.splitContainerNote.Panel1.Controls.Add(this.CategorysComboBox);
             this.splitContainerNote.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainerNote.Panel1MinSize = 165;
             // 
             // splitContainerNote.Panel2
             // 
@@ -311,10 +304,10 @@
             this.splitContainerNote.Panel2.Controls.Add(this.CreateDateTimePicker);
             this.splitContainerNote.Panel2.Controls.Add(this.CategoryTextBox);
             this.splitContainerNote.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainerNote.Size = new System.Drawing.Size(824, 427);
-            this.splitContainerNote.SplitterDistance = 274;
+            this.splitContainerNote.Panel2MinSize = 300;
+            this.splitContainerNote.Size = new System.Drawing.Size(824, 428);
+            this.splitContainerNote.SplitterDistance = 240;
             this.splitContainerNote.TabIndex = 15;
-            this.splitContainerNote.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainerNote_SplitterMoved);
             // 
             // MainForm
             // 
@@ -327,7 +320,6 @@
             this.MinimumSize = new System.Drawing.Size(630, 400);
             this.Name = "MainForm";
             this.Text = "NoteApp";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainerNote.Panel1.ResumeLayout(false);
