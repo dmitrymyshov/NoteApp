@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -49,11 +42,9 @@ namespace NoteAppUi
 
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            _note.Title = TitleTextBox.Text;
-
             if (CheckTitle)
             {
-                TitleTextBox.BackColor = Color.LightSalmon;
+                TitleTextBox.BackColor = Color.MistyRose;
             }
             else
             {
@@ -63,11 +54,9 @@ namespace NoteAppUi
 
         private void NoteTextBox_TextChanged(object sender, EventArgs e)
         {
-            _note.Text = NoteTextBox.Text;
-
             if (CheckText)
             {
-                NoteTextBox.BackColor = Color.LightSalmon;
+                NoteTextBox.BackColor = Color.MistyRose;
             }
             else
             {
@@ -84,6 +73,14 @@ namespace NoteAppUi
             else
             {
                 _note.DateChange = DateTime.Now; //автоматическое изменение даты редактирования
+
+                _note.Title = TitleTextBox.Text;
+
+                _note.Text = NoteTextBox.Text;
+
+                var selectedIndex = CategorysComboBox.SelectedIndex;
+
+                _note.Category = (NoteCategory)CategorysComboBox.Items[selectedIndex];
 
                 DialogResult = DialogResult.OK;
 
@@ -102,15 +99,13 @@ namespace NoteAppUi
         {
             if (CheckCategory)
             {
-                CategorysComboBox.BackColor = Color.LightSalmon;
+                CategorysComboBox.BackColor = Color.MistyRose;
             }
             else
             {
                 CategorysComboBox.BackColor = Color.White;
 
-                var selectedIndex = CategorysComboBox.SelectedIndex;
 
-                _note.Category = (NoteCategory)CategorysComboBox.Items[selectedIndex];
             }
         }
 
@@ -118,7 +113,7 @@ namespace NoteAppUi
         {
             get
             {
-                if (_note.Title == string.Empty)
+                if (TitleTextBox.Text == string.Empty)
                 {
                     return true;
                 }
@@ -127,14 +122,13 @@ namespace NoteAppUi
                     return false;
                 }
             }
-            set {  }
         }
 
         private bool CheckText
         {
             get
             {
-                if (_note.Text == string.Empty)
+                if (NoteTextBox.Text == string.Empty)
                 {
                     return true;
                 }
@@ -143,7 +137,6 @@ namespace NoteAppUi
                     return false;
                 }
             }
-            set { }
         }
 
         private bool CheckCategory
@@ -159,7 +152,6 @@ namespace NoteAppUi
                     return false;
                 }
             }
-            set { }
         }
     }
 }

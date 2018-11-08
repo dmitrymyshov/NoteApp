@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>note.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -113,5 +116,21 @@
   <ItemGroup>
     <None Include="Resources\delete %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="note.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>md $(SolutionDir)InstallScript\Release
+xcopy  $(SolutionDir)NoteAppUi\bin\Release\*.dll $(SolutionDir)InstallScript\Release
+xcopy $(SolutionDir)NoteAppUi\bin\Release\*.exe $(SolutionDir)InstallScript\Release
+xcopy $(SolutionDir)NoteAppUi\bin\Release\installer.iss $(SolutionDir)InstallScript\Release
+"D:\Inno Setup 5\ISCC.exe"  $(SolutionDir)InstallScript\Release\installer.iss
+xcopy  $(SolutionDir)InstallScript\Release\Output\setup.exe $(SolutionDir)InstallScript\Installers
+rd $(SolutionDir)InstallScript\Release</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -43,8 +43,8 @@
             // 
             // TitleTextBox
             // 
-            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleTextBox.Location = new System.Drawing.Point(68, 23);
             this.TitleTextBox.MaxLength = 50;
@@ -83,8 +83,8 @@
             // 
             // NoteTextBox
             // 
-            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.NoteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteTextBox.Location = new System.Drawing.Point(12, 102);
             this.NoteTextBox.Multiline = true;
@@ -156,11 +156,12 @@
             this.ChangeTextBox.TabIndex = 10;
             this.ChangeTextBox.Text = "Modified:";
             // 
-            // InnerForm
+            // NoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.ChangeTextBox);
             this.Controls.Add(this.CreateTextBox);
             this.Controls.Add(this.CategoryTextBox);
@@ -173,7 +174,7 @@
             this.Controls.Add(this.CategorysComboBox);
             this.Controls.Add(this.TitleTextBox);
             this.MinimumSize = new System.Drawing.Size(600, 400);
-            this.Name = "InnerForm";
+            this.Name = "NoteForm";
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
             this.PerformLayout();

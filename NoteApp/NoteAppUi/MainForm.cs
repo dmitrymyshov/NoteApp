@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -16,6 +10,8 @@ namespace NoteAppUi
         public MainForm()
         {
             InitializeComponent();
+
+            CategorysComboBox.Items.Add("All");
 
             foreach (NoteCategory element in Enum.GetValues(typeof(NoteCategory)))
             {
@@ -31,13 +27,21 @@ namespace NoteAppUi
                 ProjectManager.SaveToFile(allNotes);
             }
 
-            splitContainerNote.Panel2.Visible = false; //при запуске правую панель не видно(убрать  лабе расш функц!!!!!!!!!!!!!)
-
             CategorysComboBox.SelectedIndex = 0; //по умолчанию 1 категория 
 
+            if (allNotes._currentNote != -1 && allNotes._currentNote < TitlesListBox.Items.Count)
+            {
+                TitlesListBox.SelectedIndex = allNotes._currentNote;
+            }
+            else 
+            {
+                splitContainerNote.Panel2.Visible = false;
+            }
         }
 
         Project allNotes = new Project();   //список свех заметок
+
+        List<Note> sortNotes = new List<Note>(); //отсортированный список заметок
 
         private void CategorysComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -52,20 +56,26 @@ namespace NoteAppUi
                 return;
             }
 
+            allNotes._currentNote = allNotes.RealIndexes[TitlesListBox.SelectedIndex];
+
+            ProjectManager.SaveToFile(allNotes);
+
             ClearRigthPanel();
 
             splitContainerNote.Panel2.Visible = true;
 
+            sortNotes = allNotes.SortWithSelectionCategory(CategorysComboBox.SelectedIndex);
+
             //если выбран заполняем данными правую часть окна
-            TitleTextBox.Text = allNotes.Notes[TitlesListBox.SelectedIndex].Title;
+            TitleTextBox.Text = sortNotes[TitlesListBox.SelectedIndex].Title;
 
-            CategoryTextBox.Text = "Category: " + allNotes.Notes[TitlesListBox.SelectedIndex].Category;
+            CategoryTextBox.Text = "Category: " + sortNotes[TitlesListBox.SelectedIndex].Category;
 
-            CreateDateTimePicker.Value = allNotes.Notes[TitlesListBox.SelectedIndex].DateCreate;
+            CreateDateTimePicker.Value = sortNotes[TitlesListBox.SelectedIndex].DateCreate;
 
-            ChangeDateTimePicker.Value = allNotes.Notes[TitlesListBox.SelectedIndex].DateChange;
+            ChangeDateTimePicker.Value = sortNotes[TitlesListBox.SelectedIndex].DateChange;
 
-            NoteTextBox.Text = allNotes.Notes[TitlesListBox.SelectedIndex].Text;
+            NoteTextBox.Text = sortNotes[TitlesListBox.SelectedIndex].Text;
         }
 
         private void ChangeButton_Click(object sender, EventArgs e)
@@ -83,27 +93,27 @@ namespace NoteAppUi
             DeleteNote();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateNote();                                                       
         }
 
-        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeNote();                                                          
         }
 
-        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteNote();                                                        
+            DeleteNote();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new About(); //создаем форму
 
@@ -128,11 +138,13 @@ namespace NoteAppUi
             {
                 TitlesListBox.Items.Clear();
 
-                //Если выбрана любая другая категория
+                sortNotes = allNotes.SortWithSelectionCategory(CategorysComboBox.SelectedIndex);
+
                 {
-                    for (int i = 0; i < allNotes.Notes.Count; i++)
+                    for (int i = 0; i < sortNotes.Count; i++)
                     {
-                        TitlesListBox.Items.Add(allNotes.Notes[i].Title);
+                        TitlesListBox.Items.Add(sortNotes[i].Title);
+
                     }
                 }
             }
@@ -180,7 +192,7 @@ namespace NoteAppUi
             //получаем выбранную заметку
             var selectedIndex = TitlesListBox.SelectedIndex; //индекс нашей заметки в списке всех заметок allNotes
 
-            var selectedNote = allNotes.Notes[selectedIndex]; //сама заметка
+            var selectedNote = sortNotes[selectedIndex]; //сама заметка
 
             var inner = new NoteForm(); //создаем форму
 
@@ -192,7 +204,7 @@ namespace NoteAppUi
                 var updatedNote = inner.Note; //забираем измененные данные
 
                 //удалить и заменить старые данные
-                allNotes.Notes.RemoveAt(selectedIndex);
+                allNotes.Notes.RemoveAt(allNotes.RealIndexes[selectedIndex]);
 
                 allNotes.Notes.Add(updatedNote);
 
@@ -215,22 +227,25 @@ namespace NoteAppUi
                 return;
             }
 
-            //получаем выбранную заметку
-            var selectedNotesIndex = TitlesListBox.SelectedIndex; //индекс нашей заметки в списке всех заметок allNotes
+            if (MessageBox.Show("Вы уверены что хотите удалить заметку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                //получаем выбранную заметку
+                var selectedIndex = TitlesListBox.SelectedIndex; //индекс нашей заметки в списке всех заметок allNotes
 
-            var selectedIndexList = TitlesListBox.SelectedIndex; //индекс выбранной заметки в TitleListBox
+                TitlesListBox.Items.RemoveAt(selectedIndex);
 
-            TitlesListBox.Items.RemoveAt(selectedIndexList);
+                allNotes.Notes.RemoveAt(allNotes.RealIndexes[selectedIndex]);
 
-            allNotes.Notes.RemoveAt(selectedNotesIndex);
+                allNotes._currentNote = -1;
 
-            FillListbox();
+                FillListbox();
 
-            ClearRigthPanel();
+                ClearRigthPanel();
 
-            splitContainerNote.Panel2.Visible = false;
+                splitContainerNote.Panel2.Visible = false;
 
-            ProjectManager.SaveToFile(allNotes);
+                ProjectManager.SaveToFile(allNotes);
+            }
         }
     }
 }
